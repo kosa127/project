@@ -8,10 +8,25 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{--<style>--}}
+        {{--html, body {--}}
+            {{--background-color: #fff;--}}
+            {{--color: #636b6f;--}}
+            {{--font-family: 'Raleway', sans-serif;--}}
+            {{--font-weight: 100;--}}
+            {{--height: 100vh;--}}
+            {{--margin: 0;--}}
+        {{--}--}}
+
+        {{--.full-height {--}}
+            {{--height: 100vh;--}}
+        {{--}--}}
+
+    {{--</style>--}}
 </head>
 <body>
     <div id="app">
@@ -36,7 +51,14 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @if(Auth::guest())
+                            @elseif(Auth::user()->hasRole('Administrator'))
+                        &nbsp;<li>
+                            <a href="{{ route('users.index') }}">
+                                Admin panel
+                            </a>
+                        </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

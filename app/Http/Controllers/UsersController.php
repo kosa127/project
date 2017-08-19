@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('roles');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +19,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'DESC');
+       $users = User::OrderBy('id', 'DESC')->paginate(10);
 
-        return view('users.index', compact('users'));
+        return view('users.index', ['users' => $users]);
     }
 
     /**
