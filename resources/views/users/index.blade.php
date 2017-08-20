@@ -50,7 +50,7 @@
     {{$users->links()}}
 
     <p>
-        <a class="btn btn-primary" href="#">New user</a>
+        <a class="btn btn-primary" href=" {{ route('users.create') }}">New user</a>
     </p>
 
 @endsection

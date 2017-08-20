@@ -15,10 +15,10 @@ class CheckRole
      */
     public function handle($request, Closure $next)
     {
-//        if($request->user() === null)
-//        {
-//            return redirect('\login');
-//        }
+        if($request->user() === null)
+        {
+            return redirect('\login');
+        }
 
         $actions = $request->route()->getAction();
         $roles = isset($actions['roles']) ? $actions['roles'] : null; /*jezeli role sa okreslone to pozostaja, a jezeli nie, to zmienna bedzie nullem */

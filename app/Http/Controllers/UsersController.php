@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -31,18 +33,36 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CreateUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+
+        $roleAdministrator = Role::where('name', 'Administrator')->first();
+        $roleUser = Role::where('name', 'User')->first();
+
+        if(isset($request->administrator))
+        {
+            $user->roles()->attach($roleAdministrator);
+        }
+        if(isset($request->user))
+        {
+            $user->roles()->attach($roleUser);
+        }
+
+        return redirect()->route('users.index');
     }
 
     /**
