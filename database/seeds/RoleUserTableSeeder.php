@@ -13,11 +13,11 @@ class RoleUserTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        foreach(range(1, 10) as $index) //\App\User::count()
+        foreach(range(1, \App\User::count()) as $index)
         {
             DB::table('role_user')->insert([
-                'role_id' => rand(1,2), //\App\Role::count()
-                'user_id' => $faker->numberBetween(1, 10)  //\App\User::count()
+                'role_id' => rand(1,\App\Role::count()),
+                'user_id' => $faker->numberBetween(1, \App\User::count())
             ]);
         }
     }
