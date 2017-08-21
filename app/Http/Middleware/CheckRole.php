@@ -21,7 +21,7 @@ class CheckRole
         }
 
         $actions = $request->route()->getAction();
-        $roles = isset($actions['roles']) ? $actions['roles'] : null; /*jezeli role sa okreslone to pozostaja, a jezeli nie, to zmienna bedzie nullem */
+        $roles = isset($actions['roles']) ? $actions['roles'] : null;
 
         if($request->user()->hasAnyRole($roles))
         {

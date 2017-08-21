@@ -39,9 +39,11 @@
                 @endforeach
             </ul>
             </td>
-            <td class="btn-group">
-                <a class="btn btn-info" href="#">Edit</a>
-                <button class="btn btn-danger">Delete</button>
+            <td>
+                <a class="btn btn-info" href="{{ route('users.edit', $user->id) }}">Edit</a>
+                {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE']) !!}
+                <button class="btn btn-danger" >Delete</button>
+                {!! Form::close() !!}
             </td>
         </tr>
     @endforeach

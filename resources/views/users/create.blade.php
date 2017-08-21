@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Create user')
+
 @section('content')
 
 
@@ -31,8 +33,8 @@
 
     <div class="form-group">
         {!! Form::label('roles', 'Roles:') !!}
-        <p>{!!Form::checkbox('administrator', 'Administrator') !!} Administrator</p>
-        <p>{!!Form::checkbox('user', 'User') !!} User</p>
+        <p>{!!Form::checkbox('Administrator', 'Administrator') !!} Administrator</p>
+        <p>{!!Form::checkbox('User', 'User') !!} User</p>
     </div>
 
     <div class="form-group">

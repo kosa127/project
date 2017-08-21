@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\EditUserRequest;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,6 +28,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
 
     public function roles()
     {
@@ -62,6 +66,71 @@ class User extends Authenticatable
             }
         }
         return false;
+    }
+
+    public function addRole($role)
+    {
+        $this->roles()->attach($role);
+    }
+
+    public function removeRole($role)
+    {
+        $this->roles()->detach($role);
+    }
+
+    public function removeAllRoles()
+    {
+        foreach(Role::all() as $role)
+        {
+            if($this->hasRole($role->name))
+            {
+                $this->roles()->detach($role);
+            }
+        }
+    }
+
+    public function hashPassword($password)
+    {
+        $this->password = bcrypt($password);
+        $this->save();
+    }
+
+    public function updateRoles(CreateUserRequest $request)
+    {
+        foreach(Role::all() as $role)
+        {
+            if($request->has($role->name))
+            {
+                $this->addRole($role);
+            }
+        }
+    }
+
+    public function updateAll(EditUserRequest $request)
+    {
+        $this->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+
+        ]);
+
+        $this->removeAllRoles();
+
+        foreach(Role::all() as $role)
+        {
+            if($request->has($role->name))
+            {
+                $this->addRole($role);
+            }
+        }
+
+    }
+
+    public function removeUser()
+    {
+        $this->removeAllRoles();
+        $this->delete();
     }
 
 }

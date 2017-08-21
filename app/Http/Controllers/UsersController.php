@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
-use App\Role;
+use App\Http\Requests\EditUserRequest;
+use App\RoleUser;
 use App\User;
-use Illuminate\Http\Request;
+
 
 class UsersController extends Controller
 {
@@ -44,36 +45,11 @@ class UsersController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
-
-        $roleAdministrator = Role::where('name', 'Administrator')->first();
-        $roleUser = Role::where('name', 'User')->first();
-
-        if(isset($request->administrator))
-        {
-            $user->roles()->attach($roleAdministrator);
-        }
-        if(isset($request->user))
-        {
-            $user->roles()->attach($roleUser);
-        }
+        $user = User::create($request->all());
+        $user->hashPassword($request->password);
+        $user->updateRoles($request);
 
         return redirect()->route('users.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -84,19 +60,23 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  EditUserRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
-        //
+        User::find($id)->updateAll($request);
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -107,6 +87,8 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->removeUser();
+
+        return redirect()->route('users.index');
     }
 }
