@@ -24,7 +24,7 @@ class UsersController extends Controller
     {
        $users = User::OrderBy('id', 'DESC')->paginate(10);
 
-        return view('users.index', ['users' => $users]);
+        return view('admin.users.index', ['users' => $users]);
     }
 
     /**
@@ -34,7 +34,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class UsersController extends Controller
         $user->hashPassword($request->password);
         $user->updateRoles($request);
 
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -62,7 +62,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
 
-        return view('users.edit', ['user' => $user]);
+        return view('admin.users.edit', ['user' => $user]);
     }
 
     /**
@@ -76,7 +76,7 @@ class UsersController extends Controller
     {
         User::find($id)->updateAll($request);
 
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -89,6 +89,6 @@ class UsersController extends Controller
     {
         User::find($id)->removeUser();
 
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 }

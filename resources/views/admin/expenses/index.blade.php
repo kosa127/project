@@ -25,10 +25,10 @@
                    <b> {{ $expense->user->name }}</b>
                 </td>
                 <td>
-                    <a class="btn btn-info" href="{{ route('expenses.edit', $expense->id) }}">Edit</a>
-                    {{--{!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE']) !!}--}}
-                    {{--<button class="btn btn-danger" >Delete</button>--}}
-                    {{--{!! Form::close() !!}--}}
+                    <a class="btn btn-info" href="{{ route('admin.expenses.edit', $expense->id) }}">Edit</a>
+                    {!! Form::model($expense, ['route' => ['admin.expenses.destroy', $expense->id], 'method' => 'DELETE']) !!}
+                    <button class="btn btn-danger" >Delete</button>
+                    {!! Form::close() !!}
                 </td>
             </tr>
         @endforeach
@@ -37,7 +37,7 @@
     {{$expenses->links()}}
 
     <p>
-        <a class="btn btn-primary" href=" {{ route('expenses.create') }}">New expense</a>
+        <a class="btn btn-primary" href=" {{ route('admin.expenses.create') }}">New expense</a>
     </p>
 
 @endsection

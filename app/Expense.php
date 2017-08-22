@@ -43,4 +43,9 @@ class Expense extends Model
         $this->save();
     }
 
+    public function removeExpense()
+    {
+        $this->delete();
+    }
+
 }

@@ -54,12 +54,12 @@
                         @if(Auth::guest())
                             @elseif(Auth::user()->hasRole('Administrator'))
                         &nbsp;<li>
-                            <a href="{{ route('users.index') }}">
+                            <a href="{{ route('admin.users.index') }}">
                                 Manage users
                             </a>
                         </li>
                             <li>
-                                <a href="{{ route('expenses.index') }}">
+                                <a href="{{ route('admin.expenses.index') }}">
                                     Manage expenses
                                 </a>
                             </li>

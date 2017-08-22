@@ -19,7 +19,7 @@ class ExpensesController extends Controller
     {
         $expenses = Expense::OrderBy('id', 'DESC')->paginate(10);
 
-        return view('expenses.index', ['expenses' => $expenses]);
+        return view('admin.expenses.index', ['expenses' => $expenses]);
     }
 
     /**
@@ -31,7 +31,7 @@ class ExpensesController extends Controller
     {
         $users = User::pluck('name', 'id');
 
-        return view('expenses.create', ['users' => $users]);
+        return view('admin.expenses.create', ['users' => $users]);
     }
 
     /**
@@ -49,7 +49,7 @@ class ExpensesController extends Controller
         $expense->user()->associate($user->id);
         $expense->save();
 
-        return redirect()->route('expenses.index');
+        return redirect()->route('admin.expenses.index');
     }
 
     /**
@@ -74,7 +74,7 @@ class ExpensesController extends Controller
         $expense = Expense::find($id);
         $users = User::pluck('name', 'id');
 
-        return view('expenses.edit', ['expense' => $expense, 'users' => $users]);
+        return view('admin.expenses.edit', ['expense' => $expense, 'users' => $users]);
     }
 
     /**
@@ -88,7 +88,7 @@ class ExpensesController extends Controller
     {
         Expense::find($id)->updateAll($request);
 
-        return redirect()->route('expenses.index');
+        return redirect()->route('admin.expenses.index');
     }
 
     /**
@@ -99,6 +99,8 @@ class ExpensesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Expense::find($id)->removeExpense();
+
+        return redirect()->route('admin.expenses.index');
     }
 }

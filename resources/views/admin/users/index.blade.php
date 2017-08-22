@@ -43,8 +43,8 @@
             </ul>
             </td>
             <td>
-                <a class="btn btn-info" href="{{ route('users.edit', $user->id) }}">Edit</a>
-                {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE']) !!}
+                <a class="btn btn-info" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
+                {!! Form::model($user, ['route' => ['admin.users.destroy', $user->id], 'method' => 'DELETE']) !!}
                 <button class="btn btn-danger" >Delete</button>
                 {!! Form::close() !!}
             </td>
@@ -55,7 +55,7 @@
     {{$users->links()}}
 
     <p>
-        <a class="btn btn-primary" href=" {{ route('users.create') }}">New user</a>
+        <a class="btn btn-primary" href=" {{ route('admin.users.create') }}">New user</a>
     </p>
 
 @endsection
