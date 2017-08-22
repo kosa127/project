@@ -5,26 +5,18 @@
 @section('content')
 
     <table class="table table-bordered">
-        <th>#ID</th>
         <th>NAME</th>
         <th>AMOUNT</th>
-        <th>CREATED</th>
-        <th>UPDATED</th>
+        <th>LAST MODIFICATION</th>
         <th>USER</th>
         <th>ACTIONS</th>
         @foreach($expenses as $expense)
             <tr>
                 <td>
-                    {{ $expense->id }}
-                </td>
-                <td>
                     {{ $expense->name }}
                 </td>
                 <td>
-                    {{ $expense->amount }} $
-                </td>
-                <td>
-                    {{ $expense->created_at }} <p>{{ $expense->created_at->diffForHumans() }}</p>
+                    <b>{{ $expense->getPriceAttribute($expense->amount) }} $ </b>
                 </td>
                 <td>
                     {{ $expense->updated_at }} <p>{{ $expense->updated_at->diffForHumans() }}</p>
@@ -44,8 +36,8 @@
 
     {{$expenses->links()}}
 
-    {{--<p>--}}
-        {{--<a class="btn btn-primary" href=" {{ route('users.create') }}">New user</a>--}}
-    {{--</p>--}}
+    <p>
+        <a class="btn btn-primary" href=" {{ route('expenses.create') }}">New expense</a>
+    </p>
 
 @endsection

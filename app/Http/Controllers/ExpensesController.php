@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Expense;
+use App\Http\Requests\CreateExpenseRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
@@ -26,18 +28,35 @@ class ExpensesController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::pluck('name', 'id');
+
+        return view('expenses.create', ['users' => $users]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CreateExpenseRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateExpenseRequest $request)
     {
-        //
+
+        $user = User::where('id', $request->user)->first();
+        $expense = Expense::create($request->all());
+        $expense->user()->associate($user->id);
+        $expense->save();
+
+//        $expense = Expense::create();
+//        $expense->update(
+//            ['name' => $request->name,
+//                'amount' => $request->amount,
+//                'user_id' => $request->user,
+//            ]
+//        );
+//        $expense->save();
+
+        return redirect()->route('expenses.index');
     }
 
     /**

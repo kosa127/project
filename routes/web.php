@@ -30,6 +30,8 @@ Route::group(
     Route::delete('/users/{id}', 'UsersController@destroy')->name('users.destroy');
 
     Route::get('/expenses', 'ExpensesController@index')->name('expenses.index');
+    Route::get('/expenses/create', 'ExpensesController@create')->name('expenses.create');
+    Route::post('/expenses', 'ExpensesController@store')->name('expenses.store');
 });
 
 

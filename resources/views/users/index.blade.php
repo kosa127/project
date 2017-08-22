@@ -26,7 +26,7 @@
                 <ul>
                     @foreach($user->expenses as $expense)
                         <li>
-                           <b>{{$expense->amount}} $</b>    {{ $expense->name }}
+                           <b>{{$expense->getPriceAttribute($expense->amount)}} $</b>    {{ $expense->name }}
                         </li>
                     @endforeach
                 </ul>

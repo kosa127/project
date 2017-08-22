@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Expense extends Model
 {
+    protected $fillable = [
+        'name', 'user_id', 'amount',
+    ];
 
     public function user()
     {
@@ -21,5 +24,6 @@ class Expense extends Model
     {
         $this->amount = $amount * 100;
     }
+
 
 }
