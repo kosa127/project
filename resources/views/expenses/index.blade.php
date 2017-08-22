@@ -16,7 +16,7 @@
                     {{ $expense->name }}
                 </td>
                 <td>
-                    <b>{{ $expense->getPriceAttribute($expense->amount) }} $ </b>
+                    <b>{{ $expense->readAmount($expense->amount) }} $ </b>
                 </td>
                 <td>
                     {{ $expense->updated_at }} <p>{{ $expense->updated_at->diffForHumans() }}</p>
@@ -25,7 +25,7 @@
                    <b> {{ $expense->user->name }}</b>
                 </td>
                 <td>
-                    {{--<a class="btn btn-info" href="{{ route('users.edit', $user->id) }}">Edit</a>--}}
+                    <a class="btn btn-info" href="{{ route('expenses.edit', $expense->id) }}">Edit</a>
                     {{--{!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE']) !!}--}}
                     {{--<button class="btn btn-danger" >Delete</button>--}}
                     {{--{!! Form::close() !!}--}}

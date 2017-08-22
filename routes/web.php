@@ -32,6 +32,8 @@ Route::group(
     Route::get('/expenses', 'ExpensesController@index')->name('expenses.index');
     Route::get('/expenses/create', 'ExpensesController@create')->name('expenses.create');
     Route::post('/expenses', 'ExpensesController@store')->name('expenses.store');
+    Route::get('/expenses/{id}/edit', 'ExpensesController@edit')->name('expenses.edit');
+    Route::put('/expenses/{id}', 'ExpensesController@update')->name('expenses.update');
 });
 
 

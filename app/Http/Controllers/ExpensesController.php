@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Expense;
 use App\Http\Requests\CreateExpenseRequest;
+use App\Http\Requests\EditExpenseRequest;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -41,20 +42,12 @@ class ExpensesController extends Controller
      */
     public function store(CreateExpenseRequest $request)
     {
-
         $user = User::where('id', $request->user)->first();
+
         $expense = Expense::create($request->all());
+        $expense->writeAmount($request->amount);
         $expense->user()->associate($user->id);
         $expense->save();
-
-//        $expense = Expense::create();
-//        $expense->update(
-//            ['name' => $request->name,
-//                'amount' => $request->amount,
-//                'user_id' => $request->user,
-//            ]
-//        );
-//        $expense->save();
 
         return redirect()->route('expenses.index');
     }
@@ -78,19 +71,24 @@ class ExpensesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $expense = Expense::find($id);
+        $users = User::pluck('name', 'id');
+
+        return view('expenses.edit', ['expense' => $expense, 'users' => $users]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  EditExpenseRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditExpenseRequest $request, $id)
     {
-        //
+        Expense::find($id)->updateAll($request);
+
+        return redirect()->route('expenses.index');
     }
 
     /**
