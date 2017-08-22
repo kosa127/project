@@ -5,30 +5,33 @@
 @section('content')
 
     <table class="table table-bordered">
-        <th>#ID</th>
         <th>NAME</th>
+        <th>LAST MODIFICATION</th>
         <th>EMAIL</th>
-        <th>CREATED</th>
-        <th>UPDATED</th>
+        <th>EXPENSES</th>
         <th>ROLES</th>
         <th>ACTIONS</th>
     @foreach($users as $user)
         <tr>
             <td>
-                {{ $user->id }}
+                {{ $user->name }}
             </td>
             <td>
-                {{ $user->name }}
+                {{ $user->updated_at }} <p>{{ $user->updated_at->diffForHumans() }}</p>
             </td>
             <td>
                 {{ $user->email }}
             </td>
             <td>
-                {{ $user->created_at }} <p>{{ $user->created_at->diffForHumans() }}</p>
+                <ul>
+                    @foreach($user->expenses as $expense)
+                        <li>
+                           <b>{{$expense->amount}} $</b>    {{ $expense->name }}
+                        </li>
+                    @endforeach
+                </ul>
             </td>
-            <td>
-                {{ $user->updated_at }} <p>{{ $user->updated_at->diffForHumans() }}</p>
-            </td>
+
             <td>
             <ul>
                 @foreach($user->roles as $role)

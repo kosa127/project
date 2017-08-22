@@ -133,7 +133,27 @@ class User extends Authenticatable
     public function removeUser()
     {
         $this->removeAllRoles();
+        $this->removeAllExpenses();
         $this->delete();
+    }
+
+    public function sumExpenses()
+    {
+       $expenses = $this->expenses;
+       $sum = 0;
+
+       foreach($expenses as $expense)
+       {
+           $sum = $sum + $expense->amount;
+       }
+
+       return $sum;
+    }
+
+    public function removeAllExpenses()
+    {
+        $expenses = $this->expenses();
+        $expenses->delete();
     }
 
 }

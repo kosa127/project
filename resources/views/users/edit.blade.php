@@ -29,8 +29,26 @@
     <div class="form-group">
         {!! Form::label('password', 'Password:') !!}
         {!! Form::text('password', $user->password, ['class'=>'form-control']) !!}
-        <p class="small help-block">That is user's hashed password, no need to being worried :) Feel free to change it.</p>
+        <p class="small help-block">That is user's hashed password, no need to be worried :) Feel free to change it.</p>
 
+    </div>
+
+    <div class="form-group">
+        <table class="table table-bordered">
+            <th class="warning">Name:</th>
+            <th class="warning">Amount:</th>
+            {!! Form::label(null, 'Expenses:') !!}
+            @foreach($user->expenses as $expense)
+            <tr>
+                <td>{{$expense->name}}</td>
+                <td>{{$expense->getPriceAttribute($expense->amount)}} $</td>
+            </tr>
+            @endforeach
+            <tr>
+                <td><b>Overall:</b></td>
+                <td><b>{{ $user->getPriceAttribute($user->sumExpenses()) }} $</b></td>
+            </tr>
+        </table>
     </div>
 
     <div class="form-group">

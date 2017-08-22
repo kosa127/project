@@ -12,5 +12,14 @@ class Expense extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function readAmount()
+    {
+        return $this->amount/100;
+    }
+
+    public function writeAmount($amount)
+    {
+        $this->amount = $amount * 100;
+    }
 
 }
