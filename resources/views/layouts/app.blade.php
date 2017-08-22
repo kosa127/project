@@ -55,9 +55,14 @@
                             @elseif(Auth::user()->hasRole('Administrator'))
                         &nbsp;<li>
                             <a href="{{ route('users.index') }}">
-                                Admin panel
+                                Manage users
                             </a>
                         </li>
+                            <li>
+                                <a href="{{ route('expenses.index') }}">
+                                    Manage expenses
+                                </a>
+                            </li>
                         @endif
                     </ul>
 

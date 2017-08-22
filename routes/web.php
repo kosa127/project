@@ -29,6 +29,7 @@ Route::group(
     Route::put('/users/{id}', 'UsersController@update')->name('users.update');
     Route::delete('/users/{id}', 'UsersController@destroy')->name('users.destroy');
 
+    Route::get('/expenses', 'ExpensesController@index')->name('expenses.index');
 });
 
 

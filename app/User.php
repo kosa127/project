@@ -29,7 +29,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+    public function expenses()
+    {
+        return $this->hasMany('App\Expense');
+    }
 
     public function roles()
     {
