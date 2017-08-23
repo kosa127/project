@@ -14,7 +14,7 @@
     @foreach($users as $user)
         <tr>
             <td>
-                {{ $user->name }}
+                <a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a>
             </td>
             <td>
                 {{ $user->updated_at }} <p>{{ $user->updated_at->diffForHumans() }}</p>
@@ -26,7 +26,7 @@
                 <ul>
                     @foreach($user->expenses as $expense)
                         <li>
-                           <b>{{$expense->getPriceAttribute($expense->amount)}} $</b>    {{ $expense->name }}
+                           <a href="{{ route('admin.expenses.edit', $expense->id) }}"><b>{{$expense->getPriceAttribute($expense->amount)}} $</b>    {{ $expense->name }}</a>
                         </li>
                     @endforeach
                 </ul>

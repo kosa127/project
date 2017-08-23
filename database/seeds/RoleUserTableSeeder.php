@@ -15,10 +15,20 @@ class RoleUserTableSeeder extends Seeder
 
         foreach(range(1, \App\User::count()) as $index)
         {
-            DB::table('role_user')->insert([
-                'role_id' => rand(1,\App\Role::count()),
-                'user_id' => $faker->numberBetween(1, \App\User::count())
-            ]);
+            $user_id = $faker->numberBetween(1, \App\User::count());
+            $user = \App\User::find($user_id);
+
+            $role_id = $faker->numberBetween(1, \App\Role::count());
+            $role = \App\Role::find($role_id);
+
+
+            while($user->hasRole($role->name))
+            {
+                $user_id = $faker->numberBetween(1, \App\User::count());
+                $user = \App\User::find($user_id);
+            }
+
+            $user->addRole($role);
         }
     }
 }

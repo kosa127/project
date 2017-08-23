@@ -29,7 +29,7 @@
     <div class="form-group">
         {!! Form::label('password', 'Password:') !!}
         {!! Form::text('password', $user->password, ['class'=>'form-control']) !!}
-        <p class="small help-block">That is user's hashed password, no need to be worried :) Feel free to change it.</p>
+        <p class="small help-block">This is user's hashed password, no need to be worried :) Feel free to change it.</p>
 
     </div>
 
