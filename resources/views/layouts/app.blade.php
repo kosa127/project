@@ -44,7 +44,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        Home
                     </a>
                 </div>
 
@@ -61,6 +61,11 @@
                             <li>
                                 <a href="{{ route('admin.expenses.index') }}">
                                     Manage expenses
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.payments.index') }}">
+                                    Manage payments
                                 </a>
                             </li>
                         @endif

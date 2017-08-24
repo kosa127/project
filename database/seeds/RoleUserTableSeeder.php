@@ -13,22 +13,22 @@ class RoleUserTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        foreach(range(1, \App\User::count()) as $index)
+
+        foreach(range(1, \App\User::count()/2) as $index)
         {
             $user_id = $faker->numberBetween(1, \App\User::count());
             $user = \App\User::find($user_id);
 
-            $role_id = $faker->numberBetween(1, \App\Role::count());
-            $role = \App\Role::find($role_id);
+            $roleAdministrator = \App\Role::where('name', 'Administrator')->first();
 
 
-            while($user->hasRole($role->name))
+            while($user->hasRole($roleAdministrator->name))
             {
                 $user_id = $faker->numberBetween(1, \App\User::count());
                 $user = \App\User::find($user_id);
             }
 
-            $user->addRole($role);
+            $user->addRole($roleAdministrator);
         }
     }
 }

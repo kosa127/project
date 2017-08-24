@@ -86,6 +86,7 @@ class ExpensesController extends Controller
      */
     public function update(EditExpenseRequest $request, $id)
     {
+        dd($request->expense);
         Expense::find($id)->updateAll($request);
 
         return redirect()->route('admin.expenses.index');

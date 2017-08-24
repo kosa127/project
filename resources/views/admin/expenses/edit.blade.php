@@ -23,7 +23,11 @@
 
     <div class="form-group">
         {!! Form::label('user', 'User:') !!}
-        {!! Form::select('user', $users, ['selected' => $expense->user->id]); !!}
+        @if($expense->hasAnyUsers())
+            {!! Form::select('user', $users, ['selected' => $expense->user->id]); !!}
+        @else
+            {!! Form::select('user', $users,null, ['placeholder' => 'Choose a user..']); !!}
+        @endif
 
     </div>
 
@@ -33,7 +37,7 @@
     </div>
 
     <div class="form-group">
-        {!! Form::submit('Save', ['class'=>'btn btn-primary']) !!}
+        {!! Form::submit('Save changes', ['class'=>'btn btn-primary']) !!}
         {!! link_to(URL::previous(), 'Previous', ['class'=>'btn btn-default']) !!}
     </div>
 

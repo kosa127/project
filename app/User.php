@@ -152,8 +152,14 @@ class User extends Authenticatable
 
     public function removeAllExpenses()
     {
-        $expenses = $this->expenses();
-        $expenses->delete();
+        $expenses = $this->expenses;
+
+        foreach($expenses as $expense)
+        {
+            $expense->user()->dissociate();
+            $expense->removeAllPayments();
+            $expense->save();
+        }
     }
 
 }

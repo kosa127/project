@@ -6,19 +6,17 @@
 
     <table class="table table-bordered">
         <th>NAME</th>
-        <th>LAST MODIFICATION</th>
         <th>EMAIL</th>
         <th>EXPENSES</th>
         <th>ROLES</th>
+        <th>LAST MODIFICATION</th>
         <th>ACTIONS</th>
     @foreach($users as $user)
         <tr>
             <td>
                 <a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a>
             </td>
-            <td>
-                {{ $user->updated_at }} <p>{{ $user->updated_at->diffForHumans() }}</p>
-            </td>
+
             <td>
                 {{ $user->email }}
             </td>
@@ -26,7 +24,7 @@
                 <ul>
                     @foreach($user->expenses as $expense)
                         <li>
-                           <a href="{{ route('admin.expenses.edit', $expense->id) }}"><b>{{$expense->getPriceAttribute($expense->amount)}} $</b>    {{ $expense->name }}</a>
+                           <b>{{$expense->getPriceAttribute($expense->amount)}} $</b>  <a href="{{ route('admin.expenses.edit', $expense->id) }}">  {{ $expense->name }}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -41,6 +39,9 @@
 
                 @endforeach
             </ul>
+            </td>
+            <td>
+                {{ $user->updated_at }} <p>{{ $user->updated_at->diffForHumans() }}</p>
             </td>
             <td>
                 <a class="btn btn-info" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>

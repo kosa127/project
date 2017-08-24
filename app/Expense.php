@@ -16,6 +16,16 @@ class Expense extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function hasAnyUsers()
+    {
+        if($this->user != null)
+        {
+            return true;
+        }
+        else return false;
+
+    }
+
     public function payments()
     {
         return $this->hasMany('App\Payment');
@@ -61,8 +71,14 @@ class Expense extends Model
         $this->save();
     }
 
+    public function removeAllPayments()
+    {
+        $this->payments()->delete();
+    }
+
     public function removeExpense()
     {
+        $this->removeAllPayments();
         $this->delete();
     }
 

@@ -7,22 +7,25 @@
     <table class="table table-bordered">
         <th>NAME</th>
         <th>AMOUNT</th>
-        <th>LAST MODIFICATION</th>
         <th>USER</th>
+        <th>LAST MODIFICATION</th>
         <th>ACTIONS</th>
         @foreach($expenses as $expense)
             <tr>
                 <td>
-                    {{ $expense->name }}
+                   <a href="{{ route('admin.expenses.edit', $expense->id) }}"> {{ $expense->name }}</a>
                 </td>
                 <td>
                     <b>{{ $expense->readAmount($expense->amount) }} $ </b>
                 </td>
+
                 <td>
-                    {{ $expense->updated_at }} <p>{{ $expense->updated_at->diffForHumans() }}</p>
+                    @if($expense->hasAnyUsers())
+                    <a href="{{ route('admin.users.edit', $expense->user->id) }}"> <b> {{ $expense->user->name }}</b> </a>
+                    @endif
                 </td>
                 <td>
-                   <b> {{ $expense->user->name }}</b>
+                    {{ $expense->updated_at }} <p>{{ $expense->updated_at->diffForHumans() }}</p>
                 </td>
                 <td>
                     <a class="btn btn-info" href="{{ route('admin.expenses.edit', $expense->id) }}">Edit</a>

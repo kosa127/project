@@ -35,6 +35,11 @@ Route::group(
     Route::get('/admin/expenses/{id}/edit', 'ExpensesController@edit')->name('admin.expenses.edit');
     Route::put('/admin/expenses/{id}', 'ExpensesController@update')->name('admin.expenses.update');
     Route::delete('/admin/expenses/{id}', 'ExpensesController@destroy')->name('admin.expenses.destroy');
+
+    Route::get('/admin/payments', 'PaymentsController@index')->name('admin.payments.index');
+    Route::get('/admin/payments/{id}/edit', 'PaymentsController@edit')->name('admin.payments.edit');
+    Route::put('/admin/payments/{id}', 'PaymentsController@update')->name('admin.payments.update');
+    Route::delete('/admin/payments/{id}', 'PaymentsController@destroy')->name('admin.payments.destroy');
 });
 
 
