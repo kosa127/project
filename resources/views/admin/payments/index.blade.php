@@ -14,7 +14,7 @@
         @foreach($payments as $payment)
             <tr>
                 <td>
-                    @if($payment->expense->hasAnyUsers())
+                    @if($payment->expense->hasAnyUser())
                     <a href=" {{route('admin.users.edit', $payment->expense->user->id)}}">{{ $payment->expense->user->name }} </a>
                     @endif
                 </td>

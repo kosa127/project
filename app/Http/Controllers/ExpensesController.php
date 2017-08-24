@@ -7,6 +7,7 @@ use App\Http\Requests\CreateExpenseRequest;
 use App\Http\Requests\EditExpenseRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExpensesController extends Controller
 {
@@ -17,7 +18,11 @@ class ExpensesController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::OrderBy('id', 'DESC')->paginate(10);
+        if(Auth::user()->hasRole('Administrator'))
+        {
+            $expenses = Expense::OrderBy('id', 'updated_at')->paginate(10);
+        }
+        else $expenses = Expense::where('user_id', null)->orderBy('id', 'updated_at')->paginate(10);
 
         return view('admin.expenses.index', ['expenses' => $expenses]);
     }
@@ -60,7 +65,9 @@ class ExpensesController extends Controller
      */
     public function show($id)
     {
-        //
+        $expense = Expense::find($id);
+
+        return view('admin.expenses.show', ['expense' => $expense]);
     }
 
     /**
@@ -86,7 +93,6 @@ class ExpensesController extends Controller
      */
     public function update(EditExpenseRequest $request, $id)
     {
-        dd($request->expense);
         Expense::find($id)->updateAll($request);
 
         return redirect()->route('admin.expenses.index');
@@ -104,4 +110,5 @@ class ExpensesController extends Controller
 
         return redirect()->route('admin.expenses.index');
     }
+
 }

@@ -37,7 +37,7 @@
         <table class="table table-bordered">
             <th class="warning">Name:</th>
             <th class="warning">Amount:</th>
-            {!! Form::label(null, 'Expenses:') !!}
+            {!! Form::label(null, 'expenses') !!}
             @foreach($user->expenses as $expense)
             <tr>
                 <td>{{$expense->name}}</td>

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\PaymentsController;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests\EditExpenseRequest;
 
@@ -16,7 +17,7 @@ class Expense extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function hasAnyUsers()
+    public function hasAnyUser()
     {
         if($this->user != null)
         {
@@ -80,6 +81,21 @@ class Expense extends Model
     {
         $this->removeAllPayments();
         $this->delete();
+    }
+
+    public function sumPaymentsByStatus($status)
+    {
+        $sum = 0;
+
+        foreach($this->payments as $payment)
+        {
+                if($payment->status == $status)
+                {
+                    $sum = $sum + $payment->amount;
+                }
+        }
+
+        return $sum;
     }
 
 }

@@ -42,6 +42,18 @@ Route::group(
     Route::delete('/admin/payments/{id}', 'PaymentsController@destroy')->name('admin.payments.destroy');
 });
 
+Route::group(
+    [
+        'middleware' => 'roles',
+        'roles' => 'User'
+    ], function()
+{
+    Route::get('/admin/expenses', 'ExpensesController@index')->name('admin.expenses.index');
+    Route::get('/admin/expenses/{id}', 'ExpensesController@show')->name('admin.expenses.show');
+    Route::put('/admin/expenses/{id}', 'ExpensesController@update')->name('admin.expenses.update');
+
+});
+
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
