@@ -2,7 +2,7 @@
     @if(Auth::guest())
     @elseif(Auth::user()->hasRole('Administrator'))
         &nbsp;      <li>
-            <a href="{{ route('admin.users.index') }}">
+            <a href="{{ route('users.index') }}">
                 Manage users
             </a>
         </li>
@@ -12,7 +12,7 @@
     @if(Auth::guest())
     @elseif(Auth::user()->hasAnyRole(['Administrator', 'User']))
         <li>
-            <a href="{{ route('admin.expenses.index') }}">
+            <a href="{{ route('expenses.index') }}">
                 Manage expenses
             </a>
         </li>
@@ -22,7 +22,7 @@
     @if(Auth::guest())
     @elseif(Auth::user()->hasRole('Administrator'))
         <li>
-            <a href="{{ route('admin.payments.index') }}">
+            <a href="{{ route('payments.index') }}">
                 Manage payments
             </a>
         </li>

@@ -4,7 +4,7 @@ namespace App;
 
 use App\Http\Controllers\PaymentsController;
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Requests\EditExpenseRequest;
+use App\Http\Requests\UpdateExpenseRequest;
 
 class Expense extends Model
 {
@@ -59,7 +59,7 @@ class Expense extends Model
         return $sum;
     }
 
-    public function updateAll(EditExpenseRequest $request)
+    public function updateAll(UpdateExpenseRequest $request)
     {
 
 

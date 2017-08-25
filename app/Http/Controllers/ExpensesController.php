@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Expense;
-use App\Http\Requests\CreateExpenseRequest;
-use App\Http\Requests\EditExpenseRequest;
+use App\Http\Requests\StoreExpenseRequest;
+use App\Http\Requests\UpdateExpenseRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class ExpensesController extends Controller
         }
         else $expenses = Expense::where('user_id', null)->orderBy('id', 'updated_at')->paginate(10);
 
-        return view('admin.expenses.index', ['expenses' => $expenses]);
+        return view('expenses.index', ['expenses' => $expenses]);
     }
 
     /**
@@ -36,16 +36,16 @@ class ExpensesController extends Controller
     {
         $users = User::pluck('name', 'id');
 
-        return view('admin.expenses.create', ['users' => $users]);
+        return view('expenses.create', ['users' => $users]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateExpenseRequest  $request
+     * @param  StoreExpenseRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateExpenseRequest $request)
+    public function store(StoreExpenseRequest $request)
     {
         $user = User::where('id', $request->user)->first();
 
@@ -54,7 +54,7 @@ class ExpensesController extends Controller
         $expense->user()->associate($user->id);
         $expense->save();
 
-        return redirect()->route('admin.expenses.index');
+        return redirect()->route('expenses.index');
     }
 
     /**
@@ -67,11 +67,12 @@ class ExpensesController extends Controller
     {
         $expense = Expense::find($id);
 
-        return view('admin.expenses.show', ['expense' => $expense]);
+        return view('expenses.show', ['expense' => $expense]);
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -81,21 +82,21 @@ class ExpensesController extends Controller
         $expense = Expense::find($id);
         $users = User::pluck('name', 'id');
 
-        return view('admin.expenses.edit', ['expense' => $expense, 'users' => $users]);
+        return view('expenses.edit', ['expense' => $expense, 'users' => $users]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  EditExpenseRequest  $request
+     * @param  UpdateExpenseRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditExpenseRequest $request, $id)
+    public function update(UpdateExpenseRequest $request, $id)
     {
         Expense::find($id)->updateAll($request);
 
-        return redirect()->route('admin.expenses.index');
+        return redirect()->route('expenses.index');
     }
 
     /**
@@ -108,7 +109,7 @@ class ExpensesController extends Controller
     {
         Expense::find($id)->removeExpense();
 
-        return redirect()->route('admin.expenses.index');
+        return redirect()->route('expenses.index');
     }
 
 }

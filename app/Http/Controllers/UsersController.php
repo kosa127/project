@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\EditUserRequest;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\RoleUser;
 use App\User;
 
@@ -24,7 +24,7 @@ class UsersController extends Controller
     {
        $users = User::OrderBy('id', 'DESC')->paginate(10);
 
-        return view('admin.users.index', ['users' => $users]);
+        return view('users.index', ['users' => $users]);
     }
 
     /**
@@ -34,22 +34,22 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateUserRequest  $request
+     * @param  StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request)
+    public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
         $user->hashPassword($request->password);
         $user->updateRoles($request);
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -62,21 +62,21 @@ class UsersController extends Controller
     {
         $user = User::find($id);
 
-        return view('admin.users.edit', ['user' => $user]);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  EditUserRequest $request
+     * @param  UpdateUserRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditUserRequest $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         User::find($id)->updateAll($request);
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -89,6 +89,6 @@ class UsersController extends Controller
     {
         User::find($id)->removeUser();
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('users.index');
     }
 }

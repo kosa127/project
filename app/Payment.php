@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Http\Requests\EditPaymentRequest;
+use App\Http\Requests\UpdatePaymentRequest;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
@@ -45,7 +45,7 @@ class Payment extends Model
         else return 'STATUS ERROR';
     }
 
-    public function updateAll(EditPaymentRequest $request)
+    public function updateAll(UpdatePaymentRequest $request)
     {
         $this->update([
             'expense_id' => $request->expense,

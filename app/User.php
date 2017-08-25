@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\EditUserRequest;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -98,7 +98,7 @@ class User extends Authenticatable
         $this->save();
     }
 
-    public function updateRoles(CreateUserRequest $request)
+    public function updateRoles(StoreUserRequest $request)
     {
         foreach(Role::all() as $role)
         {
@@ -109,7 +109,7 @@ class User extends Authenticatable
         }
     }
 
-    public function updateAll(EditUserRequest $request)
+    public function updateAll(UpdateUserRequest $request)
     {
         $this->update([
             'name' => $request->name,

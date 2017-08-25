@@ -14,7 +14,7 @@
 
     @endif
 
-    {!! Form::open(['route' => ['admin.users.update', $user->id], 'method' => 'PUT']) !!}
+    {!! Form::open(['route' => ['users.update', $user->id], 'method' => 'PUT']) !!}
 
     <div class="form-group">
         {!! Form::label('name', 'Name:') !!}

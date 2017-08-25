@@ -14,7 +14,7 @@
 
     @endif
 
-    {!! Form::open(['route' => ['admin.expenses.update', $expense->id], 'method' => 'PUT']) !!}
+    {!! Form::open(['route' => ['expenses.update', $expense->id], 'method' => 'PUT']) !!}
 
     <div class="form-group">
         {!! Form::label('name', 'Name:') !!}
@@ -38,7 +38,7 @@
             <th>STATUS</th>
             @foreach($expense->payments as $payment)
             <tr>
-                <td><a href="{{ route('admin.payments.edit', $payment->id) }}"> {{$payment->readAmount()}} $</a></td>
+                <td><a href="{{ route('payments.edit', $payment->id) }}"> {{$payment->readAmount()}} $</a></td>
                 <td>{{ $payment->showStatus() }}</td>
             </tr>
             @endforeach

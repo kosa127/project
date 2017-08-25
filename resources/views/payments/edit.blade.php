@@ -14,7 +14,7 @@
 
     @endif
 
-    {!! Form::open(['route' => ['admin.payments.update', $payment->id], 'method' => 'PUT']) !!}
+    {!! Form::open(['route' => ['payments.update', $payment->id], 'method' => 'PUT']) !!}
 
     <div class="form-group">
         {!! Form::label('expense', 'Expense:') !!}

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create user')
+@section('title', 'Create expense')
 
 @section('content')
 
@@ -14,7 +14,7 @@
 
     @endif
 
-    {!! Form::open(['route' => 'admin.users.store']) !!}
+    {!! Form::open(['route' => 'expenses.store']) !!}
 
     <div class="form-group">
         {!! Form::label('name', 'Name:') !!}
@@ -22,19 +22,14 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('email', 'Email:') !!}
-        {!! Form::text('email', null, ['class'=>'form-control']) !!}
+        {!! Form::label('user', 'User:') !!}
+        {!! Form::select('user', $users, null, ['placeholder' => 'Pick a user...']); !!}
+
     </div>
 
     <div class="form-group">
-        {!! Form::label('password', 'Password:') !!}
-        {!! Form::text('password', null, ['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-        {!! Form::label('roles', 'Roles:') !!}
-        <p>{!!Form::checkbox('Administrator', 'Administrator') !!} Administrator</p>
-        <p>{!!Form::checkbox('User', 'User') !!} User</p>
+        {!! Form::label('amount', 'Amount:') !!}
+        {!! Form::text('amount', null, ['class'=>'form-control', 'placeholder' => 'e.g 1056,50']) !!}
     </div>
 
     <div class="form-group">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Expense;
-use App\Http\Requests\EditPaymentRequest;
+use App\Http\Requests\UpdatePaymentRequest;
 use App\Payment;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class PaymentsController extends Controller
     {
         $payments = Payment::OrderBy('id', 'DESC')->paginate(10);
 
-        return view('admin.payments.index', ['payments' => $payments]);
+        return view('payments.index', ['payments' => $payments]);
     }
 
     /**
@@ -64,21 +64,21 @@ class PaymentsController extends Controller
         $payment = Payment::find($id);
         $expenses = Expense::pluck('name', 'id');
 
-        return view('admin.payments.edit', ['payment' => $payment, 'expenses' => $expenses]);
+        return view('payments.edit', ['payment' => $payment, 'expenses' => $expenses]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  EditPaymentRequest  $request
+     * @param  UpdatePaymentRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditPaymentRequest $request, $id)
+    public function update(UpdatePaymentRequest $request, $id)
     {
         Payment::find($id)->updateAll($request);
 
-        return redirect()->route('admin.payments.index');
+        return redirect()->route('payments.index');
     }
 
     /**
@@ -91,6 +91,6 @@ class PaymentsController extends Controller
     {
         Payment::find($id)->removePayment();
 
-        return redirect()->route('admin.payments.index');
+        return redirect()->route('payments.index');
     }
 }

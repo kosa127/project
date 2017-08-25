@@ -12,7 +12,7 @@
             @endforeach
         </ul>
     @endif
-    {!! Form::open(['route' => ['admin.expenses.update', $expense->id], 'method' => 'PUT']) !!}
+    {!! Form::open(['route' => ['expenses.update', $expense->id], 'method' => 'PUT']) !!}
     <div class="form-group">
         {!! Form::label('name', 'Name:') !!}
         {!! Form::text('name', $expense->name, ['class'=>'form-control', 'readonly' => 'readonly']) !!}

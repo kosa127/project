@@ -22,24 +22,24 @@ Route::group(
         'roles' => 'Administrator'
     ], function()
 {
-    Route::get('/admin/users', 'UsersController@index')->name('admin.users.index');
-    Route::get('/admin/users/create', 'UsersController@create')->name('admin.users.create');
-    Route::post('/admin/users', 'UsersController@store')->name('admin.users.store');
-    Route::get('/admin/users/{id}/edit', 'UsersController@edit')->name('admin.users.edit');
-    Route::put('/admin/users/{id}', 'UsersController@update')->name('admin.users.update');
-    Route::delete('/admin/users/{id}', 'UsersController@destroy')->name('admin.users.destroy');
+    Route::get('/users', 'UsersController@index')->name('users.index');
+    Route::get('/users/create', 'UsersController@create')->name('users.create');
+    Route::post('//users', 'UsersController@store')->name('users.store');
+    Route::get('/users/{id}/edit', 'UsersController@edit')->name('users.edit');
+    Route::put('/users/{id}', 'UsersController@update')->name('users.update');
+    Route::delete('/users/{id}', 'UsersController@destroy')->name('users.destroy');
 
-    Route::get('/admin/expenses', 'ExpensesController@index')->name('admin.expenses.index');
-    Route::get('/admin/expenses/create', 'ExpensesController@create')->name('admin.expenses.create');
-    Route::post('/admin/expenses', 'ExpensesController@store')->name('admin.expenses.store');
-    Route::get('/admin/expenses/{id}/edit', 'ExpensesController@edit')->name('admin.expenses.edit');
-    Route::put('/admin/expenses/{id}', 'ExpensesController@update')->name('admin.expenses.update');
-    Route::delete('/admin/expenses/{id}', 'ExpensesController@destroy')->name('admin.expenses.destroy');
+    Route::get('/expenses', 'ExpensesController@index')->name('expenses.index');
+    Route::get('/expenses/create', 'ExpensesController@create')->name('expenses.create');
+    Route::post('/expenses', 'ExpensesController@store')->name('expenses.store');
+    Route::get('/expenses/{id}/edit', 'ExpensesController@edit')->name('expenses.edit');
+    Route::put('/expenses/{id}', 'ExpensesController@update')->name('expenses.update');
+    Route::delete('/expenses/{id}', 'ExpensesController@destroy')->name('expenses.destroy');
 
-    Route::get('/admin/payments', 'PaymentsController@index')->name('admin.payments.index');
-    Route::get('/admin/payments/{id}/edit', 'PaymentsController@edit')->name('admin.payments.edit');
-    Route::put('/admin/payments/{id}', 'PaymentsController@update')->name('admin.payments.update');
-    Route::delete('/admin/payments/{id}', 'PaymentsController@destroy')->name('admin.payments.destroy');
+    Route::get('/payments', 'PaymentsController@index')->name('payments.index');
+    Route::get('/payments/{id}/edit', 'PaymentsController@edit')->name('payments.edit');
+    Route::put('/payments/{id}', 'PaymentsController@update')->name('payments.update');
+    Route::delete('/payments/{id}', 'PaymentsController@destroy')->name('payments.destroy');
 });
 
 Route::group(
@@ -48,9 +48,9 @@ Route::group(
         'roles' => 'User'
     ], function()
 {
-    Route::get('/admin/expenses', 'ExpensesController@index')->name('admin.expenses.index');
-    Route::get('/admin/expenses/{id}', 'ExpensesController@show')->name('admin.expenses.show');
-    Route::put('/admin/expenses/{id}', 'ExpensesController@update')->name('admin.expenses.update');
+    Route::get('/expenses', 'ExpensesController@index')->name('expenses.index');
+    Route::get('/expenses/{id}', 'ExpensesController@show')->name('expenses.show');
+    Route::put('/expenses/{id}', 'ExpensesController@update')->name('expenses.update');
 
 });
 

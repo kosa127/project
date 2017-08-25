@@ -4,13 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditExpenseRequest extends FormRequest
+class UpdatePaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
+
     public function authorize()
     {
         return true;
@@ -21,23 +22,23 @@ class EditExpenseRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules()
     {
         return [
-            'name' => 'required|max:30|min:3',
-            'user' => 'required',
+            'expense' => 'required',
             'amount' => 'required|numeric',
+            'status' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Name field can not be empty.',
-            'name.min.max' => '',
-            'user.required' => 'Please choose a user.',
+            'user.required' => 'Please choose an expense.',
             'amount.required' => 'Please give an amount.',
-            'amount.numeric' => 'Amount should be a number.'
+            'amount.numeric' => 'Amount should be a number.',
+            'status.required' => 'Please choose payment status.',
         ];
     }
 }

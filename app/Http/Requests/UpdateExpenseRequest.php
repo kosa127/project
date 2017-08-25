@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateExpenseRequest extends FormRequest
+class UpdateExpenseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,7 +33,7 @@ class CreateExpenseRequest extends FormRequest
     public function messages()
     {
         return [
-          'name.required' => 'Name field can not be empty.',
+            'name.required' => 'Name field can not be empty.',
             'name.min.max' => '',
             'user.required' => 'Please choose a user.',
             'amount.required' => 'Please give an amount.',
