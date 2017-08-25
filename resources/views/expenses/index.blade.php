@@ -14,7 +14,11 @@
             @if( (Auth::user()->hasRole('User') && !$expense->hasAnyUser() )|| Auth::user()->hasRole('Administrator'))
             <tr>
                 <td>
-                   <a href="{{ route('expenses.edit', $expense->id) }}"> {{ $expense->name }}</a>
+                    @if(Auth::user()->hasRole('Administrator'))
+                        <a href="{{ route('expenses.edit', $expense->id) }}"> {{ $expense->name }}</a>
+                    @else
+                        <a href="{{ route('expenses.show', $expense->id) }}"> {{ $expense->name }}</a>
+                    @endif
                 </td>
                 <td>
                     <b>{{ $expense->readAmount($expense->amount) }} $ </b>

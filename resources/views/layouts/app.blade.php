@@ -27,8 +27,9 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        <div style="width: 75%; margin: 0% 10% 0% 10%">
+            @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->

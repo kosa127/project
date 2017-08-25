@@ -21,11 +21,13 @@
         {!! Form::text('name', null, ['class'=>'form-control']) !!}
     </div>
 
+    @if(Auth::user()->hasRole('Administrator'))
     <div class="form-group">
         {!! Form::label('user', 'User:') !!}
         {!! Form::select('user', $users, null, ['placeholder' => 'Pick a user...']); !!}
 
     </div>
+    @endif
 
     <div class="form-group">
         {!! Form::label('amount', 'Amount:') !!}

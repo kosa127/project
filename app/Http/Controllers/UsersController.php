@@ -55,9 +55,16 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+    public function show()
+    {
+        return view('users.show');
+    }
+
+
     public function edit($id)
     {
         $user = User::find($id);

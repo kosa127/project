@@ -3,7 +3,7 @@
     @elseif(Auth::user()->hasRole('Administrator'))
         &nbsp;      <li>
             <a href="{{ route('users.index') }}">
-                Manage users
+                Users
             </a>
         </li>
     @endif
@@ -13,7 +13,7 @@
     @elseif(Auth::user()->hasAnyRole(['Administrator', 'User']))
         <li>
             <a href="{{ route('expenses.index') }}">
-                Manage expenses
+                Expenses
             </a>
         </li>
     @endif
@@ -23,7 +23,7 @@
     @elseif(Auth::user()->hasRole('Administrator'))
         <li>
             <a href="{{ route('payments.index') }}">
-                Manage payments
+                Payments
             </a>
         </li>
     @endif

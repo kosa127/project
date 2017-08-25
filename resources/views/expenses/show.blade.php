@@ -12,7 +12,7 @@
             @endforeach
         </ul>
     @endif
-    {!! Form::open(['route' => ['expenses.update', $expense->id], 'method' => 'PUT']) !!}
+    {!! Form::open() !!}
     <div class="form-group">
         {!! Form::label('name', 'Name:') !!}
         {!! Form::text('name', $expense->name, ['class'=>'form-control', 'readonly' => 'readonly']) !!}
@@ -34,7 +34,11 @@
     </div>
     {!! Form::hidden('user', Auth::user()->id) !!}
 
-    {!! Form::submit('Add to my expenses', ['class'=>'btn btn-primary']) !!}
+    <div class="form-group">
+    {!! Form::open(['route' => ['expenses.attachUser', $expense->id], 'method' => 'PUT']) !!}
+    <button class="btn btn-success" >Save to your expenses</button>
+    </div>
+    {!! Form::close() !!}
     {!! link_to(URL::previous(), 'Previous', ['class'=>'btn btn-default']) !!}
 
     {!! Form::close() !!}

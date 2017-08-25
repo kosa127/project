@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Http\Controllers\PaymentsController;
+use App\Http\Requests\StoreExpenseRequest;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests\UpdateExpenseRequest;
 
@@ -101,6 +101,19 @@ class Expense extends Model
     public function attachUser($user)
     {
         $this->user()->associate($user);
+        $this->save();
+    }
+
+    public function store(StoreExpenseRequest $request)
+    {
+
+        $this->writeAmount($request->amount);
+        if($request->user != null)
+        {
+            $user = User::where('id', $request->user)->first();
+            $this->user()->associate($user->id);
+        }
+
         $this->save();
     }
 

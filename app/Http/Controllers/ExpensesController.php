@@ -6,11 +6,15 @@ use App\Expense;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ExpensesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('roles');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,12 +51,8 @@ class ExpensesController extends Controller
      */
     public function store(StoreExpenseRequest $request)
     {
-        $user = User::where('id', $request->user)->first();
-
         $expense = Expense::create($request->all());
-        $expense->writeAmount($request->amount);
-        $expense->user()->associate($user->id);
-        $expense->save();
+        $expense->store($request);
 
         return redirect()->route('expenses.index');
     }

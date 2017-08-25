@@ -48,12 +48,15 @@ Route::group(
         'roles' => 'User'
     ], function()
 {
+    Route::get('/users/{id}', 'UsersController@show')->name('users.show');
+
     Route::get('/expenses', 'ExpensesController@index')->name('expenses.index');
     Route::get('/expenses/{id}', 'ExpensesController@show')->name('expenses.show');
     Route::put('/expenses/{id}', 'ExpensesController@update')->name('expenses.update');
     Route::put('/expenses/{id}', 'ExpensesController@attachUser')->name('expenses.attachUser');
     Route::get('/expenses/create', 'ExpensesController@create')->name('expenses.create');
     Route::post('/expenses', 'ExpensesController@store')->name('expenses.store');
+    Route::get('/expenses/{id}/edit', 'ExpensesController@edit')->name('expenses.edit');
 
 });
 
