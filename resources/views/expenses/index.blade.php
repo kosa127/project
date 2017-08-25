@@ -38,7 +38,7 @@
 
                     @elseif(Auth::user()->hasRole('User'))
                         <a class="btn btn-info" href="{{ route('expenses.show', $expense->id) }}">Details</a>
-                        {!! Form::model($expense, ['route' => ['expenses.update', $expense->id], 'method' => 'PUT']) !!}
+                        {!! Form::open(['route' => ['expenses.attachUser', $expense->id], 'method' => 'PUT']) !!}
                         <button class="btn btn-success" >Take</button>
                         {!! Form::close() !!}
                     @endif

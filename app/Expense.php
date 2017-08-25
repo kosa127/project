@@ -98,4 +98,10 @@ class Expense extends Model
         return $sum;
     }
 
+    public function attachUser($user)
+    {
+        $this->user()->associate($user);
+        $this->save();
+    }
+
 }

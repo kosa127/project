@@ -162,9 +162,5 @@ class User extends Authenticatable
         }
     }
 
-    public function addExpense($expense_id)
-    {
-
-    }
 
 }

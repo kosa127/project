@@ -112,4 +112,11 @@ class ExpensesController extends Controller
         return redirect()->route('expenses.index');
     }
 
+    public function attachUser($id)
+    {
+        Expense::find($id)->attachUser(Auth::user());
+
+        return redirect()->route('expenses.index');
+    }
+
 }
