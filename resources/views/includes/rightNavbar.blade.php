@@ -13,7 +13,7 @@
                Logged in as: <b>{{ Auth::user()->name }}</b>  <span class="caret"></span>
             </a>
 
-            <ul class="dropdown-menu" role="menu">
+            <ul class="dropdown-menu inverse-dropdown" data-toggle="dropdown" role="menu">
                 <li>
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault();

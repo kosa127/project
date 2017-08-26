@@ -11,7 +11,7 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <style>
     body {
-        font-family: "Times New Roman", Times, serif;;
+        font-family: "Times New Roman", Times, serif;
     }
 
     input[type=radio   ]{
@@ -24,5 +24,14 @@
         text-align: center;
         vertical-align: middle
     }
-
+    .inverse-dropdown{
+        background-color: #222;
+        border-color: #080808;
+    &>li>a{
+         color: #878a8a;
+    &:hover{
+         color: #fff;
+         background-color: #000;
+     }
+    }
 </style>
