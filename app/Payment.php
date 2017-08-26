@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,12 +19,12 @@ class Payment extends Model
 
     public function readAmount()
     {
-        return $this->amount/100;
+        return $this->amount;
     }
 
     public function writeAmount($amount)
     {
-        $this->amount = $amount * 100;
+        $this->amount = $amount;
     }
 
     public function showStatus()
@@ -49,7 +50,7 @@ class Payment extends Model
     {
         $this->update([
             'expense_id' => $request->expense,
-            'amount' => $request->amount*100,
+            'amount' => $request->amount,
             'status' => $request->status,
         ]);
         $this->save();
@@ -58,6 +59,23 @@ class Payment extends Model
     public function removePayment()
     {
         $this->delete();
+    }
+
+    public function store(StorePaymentRequest $request)
+    {
+
+        $this->amount = $request->amount;
+
+        $expense = Expense::where('id', $request->expense_id)->first();
+        $this->expense()->associate($expense);
+
+        $this->save();
+    }
+
+    public function attachExpense($expense)
+    {
+        $this->expense()->associate($expense);
+        $this->save();
     }
 
 

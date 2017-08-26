@@ -16,7 +16,7 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('expense_id')->nullable()->unsigned();
-            $table->integer('amount');
+            $table->float('amount');
             $table->integer('status')->default('0');
             $table->timestamps();
         });

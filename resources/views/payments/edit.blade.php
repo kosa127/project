@@ -16,29 +16,32 @@
 
     {!! Form::open(['route' => ['payments.update', $payment->id], 'method' => 'PUT']) !!}
 
-    <div class="form-group">
-        {!! Form::label('expense', 'Expense:') !!}
-        {!! Form::select('expense', $expenses, ['selected' => $payment->expense->id]); !!}
-    </div>
+    {!! Form::hidden('expense', $payment->expense->id) !!}
 
     <div class="form-group">
         {!! Form::label('amount', 'Amount:') !!}
         {!! Form::text('amount', $payment->readAmount(), ['class'=>'form-control']) !!}
     </div>
-
+    @if(Auth::user()->hasRole('Administrator'))
     <div>
         {!! Form::label('status', 'Status:') !!}
-        <table class="table-bordered">
-            <th>REJECTED</th>
-            <th>PENDING</th>
-            <th>ACCEPTED</th>
+        <table class="table-bordered" style="width:400px;">
+            <th class="bg-danger">REJECTED</th>
+            <th class="bg-info">PENDING</th>
+            <th class="bg-success">ACCEPTED</th>
             <tr>
-                <td>{{ Form::radio('status', -1, $payment->status == -1) }}</td>
-                <td>{{ Form::radio('status', 0, $payment->status == 0) }}</td>
-                <td>{{ Form::radio('status', 1, $payment->status == 1) }}</td>
+                @if($payment->status == -1) <td class="bg-danger"> @else <td> @endif
+                        {{ Form::radio('status', -1, $payment->status == -1) }}</td>
+                @if($payment->status == 0) <td class="bg-info"> @else <td> @endif
+                    {{ Form::radio('status', 0, $payment->status == 0) }}</td>
+                @if($payment->status == 1) <td class="bg-success"> @else <td> @endif
+                    {{ Form::radio('status', 1, $payment->status == 1) }}</td>
             </tr>
         </table>
     </div>
+        @else
+        {{ Form::hidden('status', $payment->status) }}
+    @endif
 
     <div class="form-group">
         {!! Form::submit('Save changes', ['class'=>'btn btn-primary']) !!}

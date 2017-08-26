@@ -2,9 +2,12 @@
 
 namespace App;
 
+use App\Http\Controllers\PaymentsController;
 use App\Http\Requests\StoreExpenseRequest;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Requests\UpdateExpenseRequest;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class Expense extends Model
 {
@@ -34,12 +37,12 @@ class Expense extends Model
 
     public function readAmount()
     {
-        return $this->amount/100;
+        return $this->amount0;
     }
 
     public function writeAmount($amount)
     {
-        $this->amount = $amount * 100;
+        $this->amount = $amount;
     }
 
     public function getAmount()
@@ -62,11 +65,10 @@ class Expense extends Model
     public function updateAll(UpdateExpenseRequest $request)
     {
 
-
         $this->update([
             'name' => $request->name,
             'user_id' => $request->user,
-            'amount' => $request->amount*100,
+            'amount' => $request->amount,
 
         ]);
         $this->save();
@@ -79,8 +81,27 @@ class Expense extends Model
 
     public function removeExpense()
     {
-        $this->removeAllPayments();
-        $this->delete();
+        if(Auth::user()->hasRole('Administrator'))
+        {
+            $this->removeAllPayments();
+            $this->delete();
+            return true;
+        }
+        else
+        {
+            foreach($this->payments as $payment)
+            {
+                if($payment->status == 1)
+                {
+                    return false;
+                }
+            }
+            $this->removeAllPayments();
+            $this->delete();
+            return true;
+        }
+
+
     }
 
     public function sumPaymentsByStatus($status)
@@ -107,7 +128,7 @@ class Expense extends Model
     public function store(StoreExpenseRequest $request)
     {
 
-        $this->writeAmount($request->amount);
+        $this->amount = $request->amount;
         if($request->user != null)
         {
             $user = User::where('id', $request->user)->first();
@@ -115,6 +136,18 @@ class Expense extends Model
         }
 
         $this->save();
+    }
+
+    public function hasAcceptedPayments()
+    {
+        foreach($this->payments as $payment)
+        {
+            if($payment->status == 1)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

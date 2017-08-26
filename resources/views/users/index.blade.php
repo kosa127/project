@@ -24,7 +24,7 @@
                 <ul>
                     @foreach($user->expenses as $expense)
                         <li>
-                           <b>{{$expense->getPriceAttribute($expense->amount)}} $</b>  <a href="{{ route('expenses.edit', $expense->id) }}">  {{ $expense->name }}</a>
+                           <b>{{$expense->amount}} $</b>  <a href="{{ route('expenses.edit', $expense->id) }}">  {{ $expense->name }}</a>
                         </li>
                     @endforeach
                 </ul>
@@ -41,13 +41,15 @@
             </ul>
             </td>
             <td>
-                {{ $user->updated_at }} <p>{{ $user->updated_at->diffForHumans() }}</p>
+                {{ $user->updated_at }} <p><b>{{ $user->updated_at->diffForHumans() }}</b></p>
             </td>
             <td>
-                <a class="btn btn-info" href="{{ route('users.edit', $user->id) }}">Edit</a>
-                {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE']) !!}
-                <button class="btn btn-danger" >Delete</button>
-                {!! Form::close() !!}
+                <div class="btn btn-group">
+                    <a class="btn btn-info" href="{{ route('users.edit', $user->id) }}">Edit</a>
+                    {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE']) !!}
+                    <button class="btn btn-danger" >Delete</button>
+                    {!! Form::close() !!}
+                </div>
             </td>
         </tr>
     @endforeach

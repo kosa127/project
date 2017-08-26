@@ -99,6 +99,7 @@ class ExpensesController extends Controller
         return redirect()->route('expenses.index');
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -118,5 +119,6 @@ class ExpensesController extends Controller
 
         return redirect()->route('expenses.index');
     }
+
 
 }

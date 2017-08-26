@@ -9,3 +9,20 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<style>
+    body {
+        font-family: "Times New Roman", Times, serif;;
+    }
+
+    input[type=radio   ]{
+        margin-left:49%
+    }
+    input[type=text   ] {
+        width: 400px;
+    }
+    th{
+        text-align: center;
+        vertical-align: middle
+    }
+
+</style>

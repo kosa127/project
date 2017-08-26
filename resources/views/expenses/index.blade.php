@@ -21,7 +21,7 @@
                     @endif
                 </td>
                 <td>
-                    <b>{{ $expense->readAmount($expense->amount) }} $ </b>
+                    <b>{{ $expense->amount }} $ </b>
                 </td>
             @if(Auth::user()->hasRole('Administrator'))
                 <td>
@@ -31,9 +31,10 @@
                 </td>
             @endif
                 <td>
-                    {{ $expense->updated_at }} <p>{{ $expense->updated_at->diffForHumans() }}</p>
+                    {{ $expense->updated_at }} <p><b>{{ $expense->updated_at->diffForHumans() }}</b></p>
                 </td>
                 <td>
+                    <div class="btn btn-group" style="width:10%; margin-left:20%;">
                     @if(Auth::user()->hasRole('Administrator'))
                         <a class="btn btn-info" href="{{ route('expenses.edit', $expense->id) }}">Edit</a>
                         {!! Form::model($expense, ['route' => ['expenses.destroy', $expense->id], 'method' => 'DELETE']) !!}
@@ -46,6 +47,7 @@
                         <button class="btn btn-success" >Take</button>
                         {!! Form::close() !!}
                     @endif
+                    </div>
                 </td>
             </tr>
             @endif

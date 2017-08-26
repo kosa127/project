@@ -25,13 +25,12 @@
     <div class="form-group">
         {!! Form::label('user', 'User:') !!}
         {!! Form::select('user', $users, null, ['placeholder' => 'Pick a user...']); !!}
-
     </div>
     @endif
 
     <div class="form-group">
         {!! Form::label('amount', 'Amount:') !!}
-        {!! Form::text('amount', null, ['class'=>'form-control', 'placeholder' => 'e.g 1056,50']) !!}
+        {!! Form::text('amount', null, ['class'=>'form-control', 'placeholder' => 'e.g 105.50']) !!}
     </div>
 
     <div class="form-group">

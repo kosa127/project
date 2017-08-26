@@ -40,13 +40,13 @@
             {!! Form::label(null, 'expenses') !!}
             @foreach($user->expenses as $expense)
             <tr>
-                <td>{{$expense->name}}</td>
-                <td>{{$expense->getPriceAttribute($expense->amount)}} $</td>
+                <td><a href="{{route('expenses.edit', $expense->id)}}">{{$expense->name}}</a></td>
+                <td>{{$expense->amount}} $</td>
             </tr>
             @endforeach
             <tr>
                 <td><b>Overall:</b></td>
-                <td><b>{{ $user->getPriceAttribute($user->sumExpenses()) }} $</b></td>
+                <td><b>{{ $user->sumExpenses() }} $</b></td>
             </tr>
         </table>
     </div>

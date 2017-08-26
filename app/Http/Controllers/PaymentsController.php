@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Expense;
+use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentsController extends Controller
 {
@@ -24,22 +26,28 @@ class PaymentsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $expense_id = Expense::find($id)->id;
+
+        return view('payments.create', ['expense_id' => $expense_id]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StorePaymentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePaymentRequest $request)
     {
-        //
+        $payment = Payment::create($request->all());
+        $payment->store($request);
+
+        return redirect()->route('users.show', Auth::user()->id);
     }
 
     /**
@@ -78,7 +86,11 @@ class PaymentsController extends Controller
     {
         Payment::find($id)->updateAll($request);
 
-        return redirect()->route('payments.index');
+        if(Auth::user()->hasRole('Administrator'))
+        {
+            return redirect()->route('payments.index');
+        }
+        else return redirect()->route('users.show', Auth::user()->id);
     }
 
     /**
@@ -90,7 +102,26 @@ class PaymentsController extends Controller
     public function destroy($id)
     {
         Payment::find($id)->removePayment();
+        if(Auth::user()->hasRole('Administrator'))
+        {
+            return redirect()->route('payments.index');
+        }
+        else return redirect()->route('users.show', Auth::user()->id);
 
-        return redirect()->route('payments.index');
-    }
+        /**
+         * Remove the specified resource from storage.
+         *
+         *
+         * @param  int  $id
+         * @return \Illuminate\Http\Response
+         */    }
+
+//    public function attachExpense($id, $expense_id)
+//    {
+//        $expense = Expense::find($expense_id);
+//
+//        Payment::find($id)->attachExpense($expense);
+//
+//        return redirect()->route('users.show', Auth::user()->id);
+//    }
 }

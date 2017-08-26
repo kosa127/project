@@ -17,7 +17,7 @@ class CreateExpensesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->nullable()->unsigned();
             $table->string('name');
-            $table->integer('amount');
+            $table->float('amount');
             $table->timestamps();
         });
 
