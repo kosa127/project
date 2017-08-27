@@ -66,6 +66,7 @@ class ExpensesController extends Controller
     public function show($id)
     {
         $expense = Expense::find($id);
+        $this->authorize('view', $expense);
 
         return view('expenses.show', ['expense' => $expense]);
     }
@@ -80,6 +81,7 @@ class ExpensesController extends Controller
     public function edit($id)
     {
         $expense = Expense::find($id);
+        $this->authorize('edit', $expense);
         $users = User::pluck('name', 'id');
 
         return view('expenses.edit', ['expense' => $expense, 'users' => $users]);
@@ -94,7 +96,9 @@ class ExpensesController extends Controller
      */
     public function update(UpdateExpenseRequest $request, $id)
     {
-        Expense::find($id)->updateAll($request);
+        $expense = Expense::find($id);
+        $this->authorize('update', $expense);
+        $expense->updateAll($request);
 
         return redirect()->route('expenses.index');
     }
@@ -108,7 +112,9 @@ class ExpensesController extends Controller
      */
     public function destroy($id)
     {
-        Expense::find($id)->removeExpense();
+        $expense = Expense::find($id);
+        $this->authorize('delete', $expense);
+        $expense->removeExpense();
 
         return redirect()->route('expenses.index');
     }
@@ -119,6 +125,7 @@ class ExpensesController extends Controller
 
         return redirect()->route('expenses.index');
     }
+
 
 
 }

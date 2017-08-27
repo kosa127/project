@@ -17,16 +17,6 @@ class Payment extends Model
         return $this->belongsTo('App\Expense');
     }
 
-    public function readAmount()
-    {
-        return $this->amount;
-    }
-
-    public function writeAmount($amount)
-    {
-        $this->amount = $amount;
-    }
-
     public function showStatus()
     {
         $status = $this->status;

@@ -35,21 +35,6 @@ class Expense extends Model
         return $this->hasMany('App\Payment');
     }
 
-    public function readAmount()
-    {
-        return $this->amount0;
-    }
-
-    public function writeAmount($amount)
-    {
-        $this->amount = $amount;
-    }
-
-    public function getAmount()
-    {
-        return $this->amount;
-    }
-
     public function sumPayments()
     {
         $sum = 0;
@@ -100,8 +85,6 @@ class Expense extends Model
             $this->delete();
             return true;
         }
-
-
     }
 
     public function sumPaymentsByStatus($status)

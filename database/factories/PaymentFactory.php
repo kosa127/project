@@ -19,6 +19,7 @@ $factory->define(App\Payment::class, function (Faker\Generator $faker) {
     $expense = \App\Expense::find($expense_id);
     $maxAmount = $expense->amount;
     $amount = $faker->numberBetween(1, $maxAmount);
+    $status = $faker->numberBetween(-1,1);
 
     while($expense->sumPayments() + $amount >  $maxAmount)
     {
@@ -28,5 +29,6 @@ $factory->define(App\Payment::class, function (Faker\Generator $faker) {
     return [
         'expense_id' => $expense_id,
         'amount' => $amount,
+        'status' => $status,
     ];
 });

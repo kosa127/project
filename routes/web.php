@@ -36,7 +36,6 @@ Route::group(                                    //USER
         'roles' => 'User'
     ], function()
 {
-    Route::get('/expenses/{expense}', 'ExpensesController@show')->name('expenses.show');
     Route::put('/expenses/{expense}/attach-user', 'ExpensesController@attachUser')->name('expenses.attachUser');
 
     Route::get('/users/{id}', 'UsersController@show')->name('users.show');
@@ -52,6 +51,7 @@ Route::group(                                     //ADMINISTRATOR & USER
     Route::post('/expenses', 'ExpensesController@store')->name('expenses.store');
     Route::get('/expenses/{expense}/edit', 'ExpensesController@edit')->name('expenses.edit');
     Route::put('/expenses/{expense}', 'ExpensesController@update')->name('expenses.update');
+    Route::get('/expenses/{expense}', 'ExpensesController@show')->name('expenses.show');
     Route::delete('/expenses/{expense}', 'ExpensesController@destroy')->name('expenses.destroy');
 
     Route::get('/payments/{payment}/edit', 'PaymentsController@edit')->name('payments.edit');

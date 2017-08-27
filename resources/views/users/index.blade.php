@@ -58,7 +58,7 @@
     {{$users->links()}}
 
     <p>
-        <span class="glyphicons glyphicons-plus-sign"></span>
+        <a class="btn btn-primary" href=" {{ route('users.create') }}">New user</a>
     </p>
 
 @endsection

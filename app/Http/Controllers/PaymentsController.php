@@ -70,6 +70,7 @@ class PaymentsController extends Controller
     public function edit($id)
     {
         $payment = Payment::find($id);
+        $this->authorize('edit', $payment);
         $expenses = Expense::pluck('name', 'id');
 
         return view('payments.edit', ['payment' => $payment, 'expenses' => $expenses]);
@@ -84,7 +85,9 @@ class PaymentsController extends Controller
      */
     public function update(UpdatePaymentRequest $request, $id)
     {
-        Payment::find($id)->updateAll($request);
+        $payment = Payment::find($id);
+        $this->authorize('update', $payment);
+        $payment->updateAll($request);
 
         if(Auth::user()->hasRole('Administrator'))
         {
@@ -101,20 +104,17 @@ class PaymentsController extends Controller
      */
     public function destroy($id)
     {
-        Payment::find($id)->removePayment();
+        $payment = Payment::find($id);
+        $this->authorize('delete', $payment);
+        $payment->removePayment();
+
         if(Auth::user()->hasRole('Administrator'))
         {
             return redirect()->route('payments.index');
         }
         else return redirect()->route('users.show', Auth::user()->id);
 
-        /**
-         * Remove the specified resource from storage.
-         *
-         *
-         * @param  int  $id
-         * @return \Illuminate\Http\Response
-         */    }
+    }
 
 //    public function attachExpense($id, $expense_id)
 //    {

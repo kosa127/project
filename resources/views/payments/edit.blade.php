@@ -20,7 +20,7 @@
 
     <div class="form-group">
         {!! Form::label('amount', 'Amount:') !!}
-        {!! Form::text('amount', $payment->readAmount(), ['class'=>'form-control']) !!}
+        {!! Form::text('amount', $payment->amount, ['class'=>'form-control']) !!}
     </div>
     @if(Auth::user()->hasRole('Administrator'))
     <div>

@@ -13,6 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         factory(App\User::class, 20)->create();
 
+        //USER MADE FOR TESTS ONLY
         $user = new \App\User();
         $user->name = "user";
         $user->email = "user@example.com";

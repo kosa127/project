@@ -32,9 +32,8 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('roles', 'Roles:') !!}
+        {!! Form::label('roles', 'Should be an administrator?') !!}
         <p>{!!Form::checkbox('Administrator', 'Administrator') !!} Administrator</p>
-        <p>{!!Form::checkbox('User', 'User') !!} User</p>
     </div>
 
     <div class="form-group">
