@@ -1,3 +1,16 @@
+## Datebse diagram
+<p align="center"> 
+<a href="https://imgbb.com/"><img src="https://image.ibb.co/jitBSQ/dbschema.jpg" alt="dbschema" border="0"></a>
+</p>
+
+## Testing app
+
+To test this app with Administrator and User priviliges login with:
+E-Mail Address: <b>user@example.com</b>
+Password: <b>user</b>
+
+For only User priviliges you can just take one of users from users list or just create new one.
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
