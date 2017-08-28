@@ -6,8 +6,8 @@
 ## Testing app
 
 To test this app with Administrator and User priviliges login with:
-E-Mail Address: <b>user@example.com</b>
-Password: <b>user</b>
+<p>E-Mail Address: <b>user@example.com</b></p>
+<p>Password: <b>user</b></p>
 
 For only User priviliges you can just take one of users from users list or just create new one.
 
